@@ -1,0 +1,14 @@
+{
+    "require": {
+        "php": ">=7.3",
+        "telegram-bot-sdk/telegram-bot-sdk": "^2.0",
+        "vlucas/phpdotenv": "^5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Handlers\\": "handlers",
+            "Payment\\": "payment"
+        },
+        "files": ["config/helpers.php"]
+    }
+}
