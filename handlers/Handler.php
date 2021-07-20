@@ -151,7 +151,7 @@ class Handler
         if (isset($this->update)) {
             $updateValue = getNested($target, $this->update);
             if ($customValue) {
-                return $updateValue === $customValue;
+                return $updateValue == $customValue;
             }
             return $updateValue;
         }
@@ -166,7 +166,7 @@ class Handler
     public function add(string $method, array $condition = [])
     {
         $this->assignUpdates();
-        if ($this->isTrue($condition)) {
+        if ($this->isRelatedUpdate($condition)) {
             return call_user_func([$this->handler, $method]);
         }
     }
@@ -175,19 +175,9 @@ class Handler
      * @param array $condition
      * @return bool
      */
-    private function isTrue(array $condition): bool
+    private function isRelatedUpdate(array $condition): bool
     {
-        foreach ($condition as $update_key => $update) {
-            if (preg_match($this->pattern(), $update)) {
-                if (preg_match($update, $this->update($this->getUpdateType($update_key)))) {
-                    return true;
-                }
-            }
-            if ($this->update($this->getUpdateType($update_key), $update)) {
-                return true;
-            }
-        }
-        return false;
+        return $this->filterUpdate($condition, true);
     }
 
     /**
@@ -196,6 +186,28 @@ class Handler
     public function pattern(): string
     {
         return "#^(\/|\#|\~)([\|\(\)\{\}\s\\\\\/a-zA-Z0-9-\[\]\^\$\~\+_.]+)(\/|\#|\~)$#";
+    }
+
+    /**
+     * @param array $condition
+     * @param bool $check_array_count
+     * @return array|bool
+     */
+    public function filterUpdate(array $condition, bool $check_array_count = false)
+    {
+        $filteredUpdate = array_filter($condition, function ($update, $type) {
+            if (preg_match($this->pattern(), $update)) {
+                if (preg_match($update, $this->update($this->getUpdateType($type)))) {
+                    return true;
+                }
+            }
+            return $this->update($this->getUpdateType($type), $update);
+        }, ARRAY_FILTER_USE_BOTH);
+
+        if ($check_array_count) {
+            return $filteredUpdate && count($filteredUpdate) == count($condition);
+        }
+        return $filteredUpdate;
     }
 
     /**
