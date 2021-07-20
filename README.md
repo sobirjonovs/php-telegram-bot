@@ -1,4 +1,11 @@
 # Qisqacha qoʻllanma
+.. image:: https://img.shields.io/badge/Telegram-Group-blue.svg?logo=telegram
+   :target: https://telegram.me/tutorialsgroup
+   :alt: Telegram guruh
+   
+.. image:: https://img.shields.io/badge/Telegram-Group-blue.svg?logo=telegram
+   :target: https://telegram.me/sobirjonovs
+   :alt: Boshqaruvchi
 Kichkina masshtabli botlar uchun optimal bot shablon
 
 ## Vaqtinchalik va doimiy ma'lumotlarni saqlash
