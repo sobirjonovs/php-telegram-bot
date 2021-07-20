@@ -7,6 +7,9 @@ Vaqtinchalik va doimiy ma'lumotlarni saqlash `storage/StorageManager` menejeri o
 ## Hendlerlarga ajratish
 Apdeytlarni boshqarish uchun `handlers/User` papkasidagi `user_handler.php` fayliga kerakli funksiyani yozish kerak. Batafsil `user_handler.php` faylida yozilgan.
 
+## Global yordamchi funksiyalar yozish
+Glob yordamchi funksiyalarni `config/helpers.php` fayliga yozish mumkin
+
 ## Afzalliklar
 - Tezkor ishlash
 - Maxsus ma'lumotlar boshqaruv menejeri (StorageManager)
