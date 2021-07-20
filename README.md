@@ -1,4 +1,4 @@
-# php-telegram-bot
+# Qisqacha qoʻllanma
 Kichkina masshtabli botlar uchun optimal bot shablon
 
 ## Vaqtinchalik va doimiy ma'lumotlarni saqlash
