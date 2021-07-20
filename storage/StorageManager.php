@@ -98,6 +98,14 @@ class StorageManager extends FileManager
     }
 
     /**
+     * @return mixed
+     */
+    public function all()
+    {
+        return unserialize($this->get_contents($this->name));
+    }
+
+    /**
      * @param string $table
      * @return $this|bool
      */
@@ -113,20 +121,6 @@ class StorageManager extends FileManager
     }
 
     /**
-     * $search bu qidirilishi kerak bo'lgan ma'lumot.
-     * $from esa ixtiyoriy ma'lumotlar massivi. Agar u qoldirib ketilsa,
-     * $this->from($table) metodidan qaytgan natijani ishlatadi.
-     * $keys bu yerda asosan ikkita key ishlatiladi. Birinchi key bu
-     * qidiralyotgan ma'lumotni qiymati, ikkinchi key esa qidirilayotgan
-     * ma'lumotning indeksi. $search qiymati shu indekslar ichida borligi tekshiriladi.
-     *                     Masalan
-     * $data = [
-     *    'users' => [
-     *        'id' => 134,
-     *        'phone' => 99899999999
-     *    ]
-     * ];
-     *
      * @param $search
      * @param array|null $from
      * @param mixed ...$keys
