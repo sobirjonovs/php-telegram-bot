@@ -88,7 +88,6 @@ class Handler
     {
         $this->update = $telegram->getWebhookUpdates();
         $this->telegram = $telegram;
-        $this->payment = $telegram->payment;
         $this->storage = Storage::openStorage();
         $this->assignUpdates(false);
     }
