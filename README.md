@@ -8,7 +8,7 @@ Vaqtinchalik va doimiy ma'lumotlarni saqlash `storage/StorageManager` menejeri o
 Apdeytlarni boshqarish uchun `handlers/User` papkasidagi `user_handler.php` fayliga kerakli funksiyani yozish kerak. Batafsil `user_handler.php` faylida yozilgan.
 
 ## Global yordamchi funksiyalar yozish
-Glob yordamchi funksiyalarni `config/helpers.php` fayliga yozish mumkin
+Global yordamchi funksiyalarni `config/helpers.php` fayliga yozish mumkin
 
 ## Afzalliklar
 - Tezkor ishlash
