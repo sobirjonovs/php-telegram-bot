@@ -1,11 +1,15 @@
 # php-telegram-bot
 telegram-bot-sdk kutubxonasi ustiga qurilgan kichkina php-telegram-bot freymvorki
 
+## Vaqtinchalik va doimiy ma'lumotlarni saqlash
+Vaqtinchalik va doimiy ma'lumotlarni saqlash `storage/StorageManager` menejeri orqali amalga oshiriladi. Bu menejer barcha hendlerlarga biriktirilgan bo'lib, har bir hendlerni ichida `$this->storage` kabi ishlatsa bo'ladi. Ma'lumotlar `storage/files/storage.txt` faylida saqlanadi. 
+
 ## Hendlerlarga ajratish
 Apdeytlarni boshqarish uchun `handlers/User` papkasidagi `user_handler.php` fayliga kerakli funksiyani yozish kerak. Batafsil `user_handler.php` faylida yozilgan.
 
 ## Afzalliklar
 - Tezkor ishlash
+- Maxsus ma'lumotlar boshqaruv menejeri (StorageManager)
 - Boshlang'ich shablon
 - Ichki qurilgan regex
 - va boshqalar
