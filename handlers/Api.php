@@ -2,16 +2,11 @@
 
 namespace Handlers;
 
-use Payment\IpakYuli;
 use Telegram\Bot\Api as BaseApi;
 use Telegram\Bot\Objects\Message;
 
 class Api extends BaseApi
 {
-    /**
-     * @object IpakYuli
-     */
-    public $payment;
 
     /**
      * @param array $params
