@@ -1,11 +1,6 @@
-.. image:: https://img.shields.io/badge/Telegram-Group-blue.svg?logo=telegram
-   :target: https://telegram.me/tutorialsgroup
-   :alt: Telegram guruh
-   
-.. image:: https://img.shields.io/badge/Telegram-Group-blue.svg?logo=telegram
-   :target: https://telegram.me/sobirjonovs
-   :alt: Boshqaruvchi
-   
+[![\[Telegram\] tutorialsgroup](https://img.shields.io/badge/Telegram-Group-blue.svg?logo=telegram)](https://t.me/tutorialsgroup)
+[![\[Telegram\] sobirjonovs](https://img.shields.io/badge/Telegram-blue.svg?logo=telegram)](https://t.me/sobirjonovs)
+
 # Qisqacha qoʻllanma
 Kichkina masshtabli botlar uchun optimal bot shablon
 
