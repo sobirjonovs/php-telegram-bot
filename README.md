@@ -11,6 +11,7 @@ Apdeytlarni boshqarish uchun `handlers/User` papkasidagi `user_handler.php` fayl
 Global yordamchi funksiyalarni `config/helpers.php` fayliga yozish mumkin
 
 ## Afzalliklar
+- Obyektga yo'naltirilgan
 - Tezkor ishlash
 - Maxsus ma'lumotlar boshqaruv menejeri (StorageManager)
 - Boshlang'ich shablon
