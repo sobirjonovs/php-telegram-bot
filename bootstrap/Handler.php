@@ -75,6 +75,10 @@ class Handler
      * @var bool
      */
     private $isRelated;
+    /**
+     * @var false|string
+     */
+    public $type;
 
     /**
      * Handler constructor.
@@ -133,6 +137,7 @@ class Handler
     private function update(string $target, string $customValue = null)
     {
         if (isset($this->update)) {
+            $this->type = strstr($target, '.', true);
             $updateValue = getNested($target, $this->update);
             if ($customValue) {
                 return $updateValue == $customValue;
@@ -207,17 +212,9 @@ class Handler
      * @param string $key
      * @return string
      */
-    private function getUpdateType(string $key): ?string
+    private function getUpdateType(string $key): string
     {
-        if (isset($this->update['message'])) {
-            return "message.$key";
-        }
-
-        if (isset($this->update['callback_query'])) {
-            return "callback_query.$key";
-        }
-
-        return null;
+        return "{$this->type}.$key";
     }
 
     /**
@@ -227,7 +224,7 @@ class Handler
     public function map(array $filePath)
     {
         foreach ($filePath as $path) {
-            foreach(glob($this->getPath($path)) as $file) {
+            foreach(glob($this->getPath(ucfirst(strtolower($path)))) as $file) {
                 $handler = $this;
                 require_once $file;
             }
