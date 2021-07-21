@@ -1,7 +1,7 @@
 [![\[Telegram\] tutorialsgroup](https://img.shields.io/badge/Telegram-Group-blue.svg?logo=telegram)](https://t.me/tutorialsgroup)
 [![\[Telegram\] sobirjonovs](https://img.shields.io/badge/Telegram-blue.svg?logo=telegram)](https://t.me/sobirjonovs)
 
-# Qisqacha qoʻllanma
+# Qisqacha qoʻllanma (BotFramework 1.0 versiyasi uchun)
 Kichkina masshtabli botlar uchun optimal bot shablon
 
 ## Vaqtinchalik va doimiy ma'lumotlarni saqlash
