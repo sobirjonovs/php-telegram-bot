@@ -1,15 +1,11 @@
 <?php
 
-namespace Handlers;
+namespace Bootstrap;
 
-use Handlers\Pluggables\KeyboardsTrait;
-use Handlers\Pluggables\SendsTrait;
-use Handlers\User\CallbackQueryHandler;
-use Handlers\User\MessageHandler;
-use Storage\FileManager;
+use Bootstrap\Pluggables\KeyboardsTrait;
+use Bootstrap\Pluggables\SendsTrait;
 use Storage\Storage;
 use Storage\StorageManager;
-use function snake_case;
 
 /**
  * Class Handler
@@ -72,13 +68,13 @@ class Handler
      */
     public $name;
     /**
-     * @var CallbackQueryHandler|MessageHandler|void
-     */
-    public $handler;
-    /**
      * @var StorageManager
      */
     public $storage;
+    /**
+     * @var bool
+     */
+    private $isRelated;
 
     /**
      * Handler constructor.
@@ -89,55 +85,44 @@ class Handler
         $this->update = $telegram->getWebhookUpdates();
         $this->telegram = $telegram;
         $this->storage = Storage::openStorage();
-        $this->assignUpdates(false);
+        $this->assignUpdates();
     }
 
     /**
      * Parses updates
-     * @return MessageHandler|CallbackQueryHandler|void
      */
-    private function assignUpdates($handler = true)
+    private function assignUpdates()
     {
         if (isset($this->update['message'])) {
-            $this->messageUpdate($handler);
+            $this->messageUpdate();
         }
 
         if (isset($this->update['callback_query'])) {
-            $this->callbackUpdate($handler);
+            $this->callbackUpdate();
         }
     }
 
     /**
      * Processes callback query updates
-     * @return CallbackQueryHandler|void
      */
-    private function callbackUpdate($handler = false)
+    private function callbackUpdate()
     {
         $this->chat_id = $this->update('callback_query.message.chat.id');
         $this->callback_data = $this->update('callback_query.data');
         $this->callback_query_id = $this->update('callback_query.id');
         $this->message_id = $this->update('callback_query.message.message_id');
         $this->name = $this->update('callback_query.message.chat.first_name');
-
-        if ($handler) {
-            $this->handler = new CallbackQueryHandler($this->telegram);
-        }
     }
 
     /**
      * Processes message updates
-     * @return MessageHandler|void
      */
-    private function messageUpdate($handler = false)
+    private function messageUpdate()
     {
         $this->from = $this->update('message.from');
         $this->text = $this->update('message.text');
         $this->chat_id = $this->update('message.chat.id');
         $this->name = $this->update('message.chat.first_name');
-
-        if ($handler) {
-            $this->handler = new MessageHandler($this->telegram);
-        }
     }
 
     /**
@@ -158,15 +143,24 @@ class Handler
     }
 
     /**
-     * @param string $method
      * @param array $condition
+     * @return $this
+     */
+    public function when(array $condition): Handler
+    {
+        $this->isRelated = $this->isRelatedUpdate($condition);
+        return $this;
+    }
+
+    /**
+     * @param string $class
+     * @param string $method
      * @return false|mixed|void
      */
-    public function add(string $method, array $condition = [])
+    public function do(string $class, string $method)
     {
-        $this->assignUpdates();
-        if ($this->isRelatedUpdate($condition)) {
-            return call_user_func([$this->handler, $method]);
+        if ($this->isRelated) {
+            return call_user_func([new $class($this->telegram), $method]);
         }
     }
 
@@ -210,22 +204,20 @@ class Handler
     }
 
     /**
-     * @param string $className
-     * @return false|mixed
-     */
-    private function getClassName(string $className)
-    {
-        $className = explode("\\", $className);
-        return end($className);
-    }
-
-    /**
-     * @param string $update_key
+     * @param string $key
      * @return string
      */
-    private function getUpdateType(string $update_key): string
+    private function getUpdateType(string $key): ?string
     {
-        return snake_case($this->getClassName(get_class($this->handler))) . '.' . $update_key;
+        if (isset($this->update['message'])) {
+            return "message.$key";
+        }
+
+        if (isset($this->update['callback_query'])) {
+            return "callback_query.$key";
+        }
+
+        return null;
     }
 
     /**
@@ -248,6 +240,6 @@ class Handler
      */
     private function getPath(string $path): string
     {
-        return __DIR__ . DIRECTORY_SEPARATOR . $path . DIRECTORY_SEPARATOR . '*' . self::TARGET_FILE;
+        return __DIR__ . "/../handlers/" . $path . "/" . '*' . self::TARGET_FILE;
     }
 }
