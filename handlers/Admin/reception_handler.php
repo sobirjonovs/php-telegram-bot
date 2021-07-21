@@ -8,4 +8,5 @@ use Bootstrap\Handler;
  * @var $handler Handler
  * */
 
-$handler->when(['text' => '/product'])->do(ReceptionHandler::class, 'reception');
+$handler->when(['text' => '/reception'])
+    ->do(ReceptionHandler::class, 'reception');
