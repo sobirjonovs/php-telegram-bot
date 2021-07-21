@@ -2,8 +2,8 @@
 
 require_once "vendor/autoload.php";
 
-use Handlers\Api;
-use Handlers\Handler;
+use Bootstrap\Api;
+use Bootstrap\Handler;
 use Telegram\Bot\Exceptions\TelegramSDKException;
 
 try {
@@ -11,6 +11,8 @@ try {
 
     $handler = new Handler($telegram);
     $handler->map(['User']);
-} catch (TelegramSDKException | Exception $e) {
-    file_put_contents('error.log', $e->getMessage());
+} catch (TelegramSDKException $e) {
+    file_put_contents('sdk_exception.log', $e->getMessage());
+} catch (Exception $e) {
+    file_put_contents('exception.log', $e->getMessage());
 }

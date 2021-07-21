@@ -2,10 +2,10 @@
 
 namespace Handlers\User;
 
-use Handlers\Handler;
+use Bootstrap\Handler;
 use Telegram\Bot\Objects\Message;
 
-class MessageHandler extends Handler
+class WelcomeHandler extends Handler
 {
     /**
      * @return Message
@@ -24,22 +24,6 @@ class MessageHandler extends Handler
         return $this->answer("Assalomu alaykum!", [
             'reply_markup' => $keyboard,
             'parse_mode' => 'markdown'
-        ]);
-    }
-
-    /**
-     * @return Message
-     */
-    public function inline(): Message
-    {
-        $inline = $this->inlineKeyboard([
-            [
-                'text' => "Inlayn 1", 'callback_data' => 'salom'
-            ]
-        ]);
-
-        return $this->answer("Inlayn namuna", [
-            'reply_markup' => $inline
         ]);
     }
 }

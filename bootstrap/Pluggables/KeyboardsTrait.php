@@ -1,6 +1,6 @@
 <?php
 
-namespace Handlers\Pluggables;
+namespace Bootstrap\Pluggables;
 
 trait KeyboardsTrait
 {

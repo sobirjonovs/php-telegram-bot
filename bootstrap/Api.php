@@ -1,6 +1,6 @@
 <?php
 
-namespace Handlers;
+namespace Bootstrap;
 
 use Telegram\Bot\Api as BaseApi;
 use Telegram\Bot\Objects\Message;

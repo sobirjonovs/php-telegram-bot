@@ -2,10 +2,9 @@
 
 namespace Handlers\User;
 
-use Handlers\Handler;
-use Telegram\Bot\Objects\Message;
+use Bootstrap\Handler;
 
-class CallbackQueryHandler extends Handler
+class CallbackHandler extends Handler
 {
     /**
      * @return mixed

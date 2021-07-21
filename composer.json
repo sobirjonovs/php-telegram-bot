@@ -1,13 +1,14 @@
 {
     "require": {
-        "php": ">=7.3",
+        "php": ">=7.4",
         "telegram-bot-sdk/telegram-bot-sdk": "^2.0",
       "ext-json": "*"
     },
     "autoload": {
         "psr-4": {
             "Handlers\\": "handlers",
-            "Storage\\": "storage"
+            "Storage\\": "storage",
+            "Bootstrap\\": "bootstrap"
         },
         "files": ["config/helpers.php"]
     }
